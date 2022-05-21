@@ -1,4 +1,4 @@
-import BaseModel, { NumberAndMsg, RegexAndMsg } from "../valid/BaseModel";
+import { BaseModel, RegexAndMsg } from "react-mui-validation";
 
 export default class AddressModel extends BaseModel {
   protected static _required = ["firstName", "lastName", 'email', 'address1', 'address2', 'city', 'zip', 'country'];

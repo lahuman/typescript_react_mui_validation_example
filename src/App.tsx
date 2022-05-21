@@ -16,7 +16,7 @@ import AddressForm from './Components/AddressForm';
 import PaymentForm from './Components/PaymentForm';
 import Review from './Components/Review';
 import AddressModel from './Components/AddressModel';
-import { ErrorState, initErrorState, validation } from './valid/ValidSupport';
+import { ErrorState, initErrorState, validation } from 'react-mui-validation';
 import { PaymentModel } from './Components/PaymentModel';
 
 function Copyright() {

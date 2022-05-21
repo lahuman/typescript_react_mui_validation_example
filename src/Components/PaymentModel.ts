@@ -1,4 +1,4 @@
-import BaseModel, { RegexAndMsg } from "../valid/BaseModel";
+import {BaseModel, RegexAndMsg } from "react-mui-validation";
 
 export class PaymentModel extends BaseModel {
   protected static _required = ["cardName", "cardNumber", "expDate", "cvv"];

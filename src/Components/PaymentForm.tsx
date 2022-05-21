@@ -6,7 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { DataProps } from '../App';
 import { PaymentModel } from './PaymentModel';
-import { makeErrorProps } from '../valid/ValidSupport';
+import { makeErrorProps } from 'react-mui-validation';
 
 export default function PaymentForm(props: DataProps<PaymentModel>) {
   const {data, setData, errorState} = props;
