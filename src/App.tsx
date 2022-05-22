@@ -64,24 +64,22 @@ export default function Checkout() {
   }
 
   const handleNext = () => {
+    let result = {
+      newErrorState: {},
+      isValid: false
+    }
     if(activeStep === 0){
-      const { newErrorState, isValid } = validation(AddressModel, addressData);
-      setErrorState({
-        ...errorState,
-        ...newErrorState,
-      });
-      if (!isValid) {
-        return;
-      }
+      result = validation(AddressModel, addressData);
     }else if(activeStep === 1){
-      const { newErrorState, isValid } = validation(PaymentModel, paymentData);
-      setErrorState({
-        ...errorState,
-        ...newErrorState,
-      });
-      if (!isValid) {
-        return;
-      }
+      result = validation(PaymentModel, paymentData);
+    }
+
+    setErrorState({
+      ...errorState,
+      ...result.newErrorState,
+    });
+    if (!result.isValid) {
+      return;
     }
     setActiveStep(activeStep + 1);
   };

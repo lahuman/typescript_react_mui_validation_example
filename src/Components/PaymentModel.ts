@@ -1,9 +1,9 @@
 import {BaseModel, RegexAndMsg } from "react-mui-validation";
 
 export class PaymentModel extends BaseModel {
-  protected static _required = ["cardName", "cardNumber", "expDate", "cvv"];
+   static required = ["cardName", "cardNumber", "expDate", "cvv"];
 
-  protected static _regex = {
+   static regex = {
     cardNumber: new RegexAndMsg(
       /(5[1-5]\d{14})|(4\d{12})(\d{3}?)|3[47]\d{13}|(6011\d{12})/i,
       "wrong card number"
