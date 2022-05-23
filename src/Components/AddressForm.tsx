@@ -5,12 +5,18 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { makeErrorProps } from 'react-mui-validation';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { format } from 'date-fns';
+
 import { DataProps } from '../App';
 import AddressModel from './AddressModel';
 
 export default function AddressForm(props: DataProps<AddressModel>) {
-  const {data, setData, errorState} = props;
-  
+  const {data, setData, errorState} = props;  
+  const [value, setValue] = React.useState<string | null>(null);
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
     if (type === 'number' && parseInt(value) < 0) {
@@ -59,6 +65,37 @@ export default function AddressForm(props: DataProps<AddressModel>) {
             onChange={onChange}
             {...makeErrorProps(errorState, 'lastName')}
           />
+        </Grid>
+        
+        <Grid item xs={12}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DateTimePicker
+                label="reservation Date and Time"
+                value={value}
+                onChange={(newValue, keyboardInputValue) => {
+                  let result = keyboardInputValue;
+                  if (newValue && newValue.toString() !== 'Invalid Date') {
+                    result = format(new Date(newValue), 'yyyy-MM-dd HH:mm');
+                  }
+                  setData({ ...data, dtm: result ?? '' });
+                  // 화면에 갱신 문제로 이렇게 처리 해야함... :(
+                  setValue(newValue);
+                }}
+                inputFormat="yyyy-MM-dd HH:mm"
+                disableOpenPicker={false}
+                ampm={false}
+                mask="____-__-__ __:__"
+                renderInput={dProps => (
+                  <TextField
+                    {...dProps}
+                    required
+                    variant="standard"
+                    sx={{ width: '100%' }}
+                    {...makeErrorProps(errorState, 'dtm')}
+                  />
+                )}
+              />
+            </LocalizationProvider>
         </Grid>
         <Grid item xs={12}>
           <TextField
